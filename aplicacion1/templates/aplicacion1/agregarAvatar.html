@@ -1,0 +1,16 @@
+{% extends 'aplicacion1/home.html'%}
+
+{%block pagina%}
+    <div class="sidebar-heading border-bottom bg-light">Editar Avatar</div>
+{% endblock pagina%}
+
+{% block contenido%}
+    <h2>Cambio de foto de perfil</h2>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table>
+            {{form.as_table}}
+        </table>
+        <input type="submit" value="Guardar Cambios">
+    </form>
+{% endblock contenido%}

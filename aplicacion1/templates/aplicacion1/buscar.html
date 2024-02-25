@@ -1,0 +1,14 @@
+{% extends 'aplicacion1/home.html'%}
+
+{%block pagina%}
+    <div class="sidebar-heading border-bottom bg-light">Busqueda</div>
+{% endblock pagina%}
+
+{% block contenido%}
+    <h2>Ingrese patron de busqueda</h2>
+    <form action="{% url 'buscarJuego' %}" method="get">
+        {% csrf_token %}
+        <p>Ingrese patron de busqueda: <input type="text" name="buscar" id="buscar"></p>
+        <input type="submit" value="Buscar">
+    </form>
+{% endblock contenido%}

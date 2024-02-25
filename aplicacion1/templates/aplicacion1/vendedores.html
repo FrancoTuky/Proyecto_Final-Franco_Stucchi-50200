@@ -1,0 +1,50 @@
+{% extends 'aplicacion1/home.html'%}
+
+{%block  botonera%}
+    <li class="nav-item active"><a class="nav-link" href="{% url 'formularioVendedores'%}">Agregar Vendedor</a></li>            
+{%endblock %}
+
+{%block pagina%}
+    <div class="sidebar-heading border-bottom bg-light">Vendedores</div>
+{% endblock pagina%}
+
+{% block contenido%}
+    <h2>Lista de Vendedores Activos</h2>
+    <table class="table table-striped">
+
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Numero de Vendedor</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+    {% for v in vendedores %}
+            <tr>
+                <td>{{v.id}}</td>
+                <td>{{v.nombre}}</td>
+                <td>{{v.apellido}}</td>
+                <td>{{v.numeroV}}</td>
+                <td>
+                    <a
+                        href="{%url 'VendedoresUpdate' v.id%}"
+                        class="btn btn-primary"
+                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                        ><i class="fa fa-edit fa-sm" title="Editar"></i>
+                    </a>
+                    <a
+                        href="{%url 'VendedoresDelete' v.id%}"
+                        class="btn btn-danger"
+                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                        ><i class="fa fa-trash fa-sm" title="Eliminar"></i>
+                    </a>  
+                </td>
+            </tr>
+    {%endfor%}
+        </tbody>
+    </table>
+        
+{% endblock contenido%}

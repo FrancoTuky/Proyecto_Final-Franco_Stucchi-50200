@@ -1,0 +1,57 @@
+{% extends 'aplicacion1/home.html'%}
+
+{%block  botonera%}
+    {% if request.user.is_staff %} 
+        <li class="nav-item active"><a class="nav-link" href="{% url 'formularioFiguras'%}">Agregar Figuras</a></li>     
+    {%endif%}       
+    <li class="nav-item active"><a class="nav-link" href="{% url 'buscar2'%}">Buscar:</a></li>  
+{%endblock %}
+
+{%block pagina%}
+    <div class="sidebar-heading border-bottom bg-light">Figuras/Juguetes</div>
+{% endblock pagina%}
+
+{% block contenido%}
+    <h2>Figuras/Juguetes Disponibles</h2>
+    <table class="table table-striped">
+
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Saga</th>
+                <th>Precio</th>
+                {% if request.user.is_staff %}
+                <th>Editar/Borrar</th>
+                {%endif%}
+            </tr>
+        </thead>
+        <tbody>
+    {% for f in figuras %}
+            <tr>
+                <td>{{f.id}}</td>
+                <td>{{f.nombre}}</td>
+                <td>{{f.saga}}</td>
+                <td>{{f.precio}}</td>
+                {% if request.user.is_staff %}
+                <td>
+                    <a
+                        href="{%url 'FigurasUpdate' f.id%}"
+                        class="btn btn-primary"
+                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                        ><i class="fa fa-edit fa-sm" title="Editar"></i>
+                    </a>
+                    <a
+                        href="{%url 'FigurasDelete' f.id%}"
+                        class="btn btn-danger"
+                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                        ><i class="fa fa-trash fa-sm" title="Eliminar"></i>
+                    </a>  
+                </td>
+                {%endif%}
+            </tr>
+    {%endfor%}
+        </tbody>
+    </table>
+        
+{% endblock contenido%}

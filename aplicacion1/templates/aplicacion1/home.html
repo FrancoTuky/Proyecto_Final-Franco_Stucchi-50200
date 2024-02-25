@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% load static %}
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Tienda el Rincon del Geek</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico'%}" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="{% static 'css/styles.css'%}" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </head>
+    <body>
+        <div class="d-flex" id="wrapper">
+            <!-- Sidebar-->
+            <div class="border-end bg-white" id="sidebar-wrapper">
+                {%block pagina%}
+                <div class="sidebar-heading border-bottom bg-light">Inicio</div>
+                {% endblock pagina%}
+                <div class="list-group list-group-flush">
+                    {% if user.is_authenticated%}
+                        {% if request.user.is_staff %} 
+                            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'usuarios' %}">Usuarios</a>
+                            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'vendedores' %}">Vendedores</a>
+                        {% endif %}
+                    {% endif %}
+                        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'juegos' %}">Juegos</a>
+                        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'figuras' %}">Figuras</a>
+                        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{% url 'comentarios' %}">Comentarios</a>
+                    
+                    
+                    <div align="center"><img src="\media\Imagenes\titanfall2.webp"width="200" height="300"></div>
+                    
+                    
+                </div>
+            </div>
+            <!-- Page content wrapper-->
+            <div id="page-content-wrapper">
+                <!-- Top navigation-->
+                <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                    <div class="container-fluid">
+                        <button class="btn btn-primary" id="sidebarToggle">Ocultar Menú</button>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+                                {% if  user.is_authenticated %}
+                                <p style="color:green">{{user.username}}</p>
+                                <div class= "text-center">
+                                    <a  href="{% url 'agregarAvatar' %}" ><img src="{{ request.session.avatar }}" height="40px" weight="40px"/></a>
+                                </div>
+                                    
+                                    <li class="nav-item active"><a class="nav-link" href="{% url 'editarPerfil'%}">Editar Perfil</a></li>
+                                {%endif%}
+                                <li class="nav-item active"><a class="nav-link" href="{% url 'home'%}">Home</a></li>
+                                {%block  botonera%}
+                                
+                                {%endblock %}
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menú</a>
+                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                        {% if  user.is_authenticated %}
+                                        <form action="{% url 'logout'  %}" method="POST">
+                                            {% csrf_token %}
+                                            <button type="submit">Cerrar Sesion</button>
+                                        </form>
+                                        {% else%}
+                                        <a class="dropdown-item" href="{% url 'login' %}">Iniciar Sesion</a>
+                                        <a class="dropdown-item" href="{% url 'registro' %}">Registrarse</a>
+                                        {% endif%}
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <!-- Page content-->
+                {% block contenido%}
+                
+                <div class="container-fluid">
+                    <p>
+                        <h1 style="text-align: center; color:blue"><font face="Verdana"><b>Rincon del Geek</b></font> </h1>
+                    </p>
+                    <p>
+                        <h4 style="text-align: left;"> Bienvenidos a la página Rincon del Geek</h4>
+                        <h6 style="text-align: left;"> Si sos fanático de la cultura geek, este es tu lugar.<br>
+                            Aquí encontraras una amplia cantidad de juegos y figuras.<br>
+                            No dudes en dejarnos un comentario desde el apartado correspondiente.<br>
+                        </h6>
+                    </p>
+                    <p>
+                        <div class="Contenedor_imagenes">
+                            <img src="https://static.wikia.nocookie.net/godofwar/images/d/dc/Portada_God_of_War_II_NA.png/revision/latest?cb=20211007232628&path-prefix=es"width="300" height="400"/>
+                            <img src="https://media.wired.co.uk/photos/606dbab1e46630a583ab3452/4:3/w_664,h_498,c_limit/monster-hunter.jpg"width="700" height="400"/>
+                        </div>
+                    <div>
+                        <h6>Página creada por <a href="{% url 'acercaDeMi' %}">Franco Stucchi</a></h6>
+       
+                    </p>
+                </div>
+                {% endblock contenido%}
+            </div>
+        </div>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="{% static 'js/scripts.js'%}"></script>
+    </body>
+</html>

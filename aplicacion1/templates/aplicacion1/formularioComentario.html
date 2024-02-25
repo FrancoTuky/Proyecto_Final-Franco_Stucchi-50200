@@ -1,0 +1,16 @@
+{% extends 'aplicacion1/home.html'%}
+
+{%block pagina%}
+    <div class="sidebar-heading border-bottom bg-light">Opiniones</div>
+{% endblock pagina%}
+
+{% block contenido%}
+    <h2>Escriba su reseña</h2>
+    <form action="" method="post">
+        {% csrf_token %}
+        <table>
+            {{form.as_table}}
+        </table>
+        <input type="submit" value="Enviar">
+    </form>
+{% endblock contenido%}

@@ -1,0 +1,31 @@
+{% extends 'aplicacion1/home.html'%}
+
+{%block  botonera%}
+    <li class="nav-item active"><a class="nav-link" href="{% url 'formularioComentario'%}">Agregar Comentario</a></li>            
+{%endblock %}
+
+{%block pagina%}
+    <div class="sidebar-heading border-bottom bg-light">Reseñas</div>
+{% endblock pagina%}
+
+{% block contenido%}
+    <h2>Reseñas de la pagina/Juegos</h2>
+    <table class="table table-striped">
+
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>comentario</th>
+            </tr>
+        </thead>
+        <tbody>
+    {% for c in comentarios %}
+            <tr>
+                <td>{{c.id}}</td>
+                <td>{{c.comentario}}</td>
+            </tr>
+    {%endfor%}
+        </tbody>
+    </table>
+        
+{% endblock contenido%}

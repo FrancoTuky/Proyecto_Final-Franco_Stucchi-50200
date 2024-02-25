@@ -1,0 +1,31 @@
+{% extends 'aplicacion1/home.html'%}
+
+{%block pagina%}
+    <div class="sidebar-heading border-bottom bg-light">Usuarios Registrados</div>
+{% endblock pagina%}
+
+{% block contenido%}
+    <h2>Lista de usuarios registrados</h2>
+    <table class="table table-striped">
+
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Mail</th>
+            </tr>
+        </thead>
+        <tbody>
+    {% for u in usuarios %}
+            <tr>
+                <td>{{u.id}}</td>
+                <td>{{u.username}}</td>
+                <td>{{u.last_name}}</td>
+                <td>{{u.email}}</td>
+            </tr>
+    {%endfor%}
+        </tbody>
+    </table>
+        
+{% endblock contenido%}
